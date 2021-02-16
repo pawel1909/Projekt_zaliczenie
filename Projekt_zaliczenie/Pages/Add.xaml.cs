@@ -59,7 +59,10 @@ namespace Projekt_zaliczenie.Pages
             #region Formatowanie numeru ze względu na kraj
             string[] split = Phone.Text.Split(new char[] { '-', '(', ')' });
             StringBuilder sb = new StringBuilder();
-
+            if (Country_box.Text == "")
+            {
+                Phone.Text = "";
+            }
             if (Country_box.Text == "")
             {
                 Phone.MaxLength = 0;

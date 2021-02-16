@@ -7,35 +7,17 @@
              xmlns:Projekt_zaliczenie="clr-namespace:Projekt_zaliczenie" x:Class="Projekt_zaliczenie.Pages.Test"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1366" Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="phoneBooksViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:PhoneBooks}, CreateList=True}"/>
-        <CollectionViewSource x:Key="phoneBooksPeopleViewSource" Source="{Binding People, Source={StaticResource phoneBooksViewSource}}"/>
-    </UserControl.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="600,200,0,0" HorizontalAlignment="Left" DataContext="{StaticResource phoneBooksPeopleViewSource}" Width="343">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Country ID:"/>
-            <TextBox x:Name="countryIDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding CountryID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="f Name:"/>
-            <TextBox x:Name="fNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding fName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="ID:"/>
-            <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="l Name:"/>
-            <TextBox x:Name="lNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding lName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Phone Book ID:"/>
-            <TextBox x:Name="phoneBookIDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding PhoneBookID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-        </Grid>
-
+        <DataGrid x:Name="Testgrid" Grid.Row="0" Grid.Column="0" SelectionChanged="zmiana_test"/>
+        <Button x:Name="test_btn" Content="Test" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="100" Click="test_btn_Click"/>
     </Grid>
 </UserControl>

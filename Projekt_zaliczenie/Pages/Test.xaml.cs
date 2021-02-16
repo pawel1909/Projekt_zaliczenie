@@ -36,5 +36,28 @@ namespace Projekt_zaliczenie.Pages
             // 	myCollectionViewSource.Source = your data
             // }
         }
+
+        private void test_btn_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerEntities db = new OwnerEntities();
+
+            this.Testgrid.ItemsSource = db.PhoneBooks.ToList();
+        }
+
+        private void zmiana_test(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.Testgrid.SelectedIndex == 0)
+            {
+                if (this.Testgrid.SelectedItems.Count >= 0)
+                {
+                    if (this.Testgrid.SelectedItems[0].GetType() == typeof(PhoneBooks))
+                    {
+                        PhoneBooks p = new PhoneBooks();
+
+                        
+                    }
+                }
+            }
+        }
     }
 }
