@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OwnerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EmailAddresses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="PersonID" Type="int" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="nvarchar(max)" />
+          <Property Name="lName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fName" Type="nvarchar(max)" />
+          <Property Name="lName" Type="nvarchar(max)" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="PhoneBookID" Type="int" />
+        </EntityType>
+        <EntityType Name="PhoneBooks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerID" Type="int" />
+        </EntityType>
+        <EntityType Name="PhoneNumbers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" />
+          <Property Name="PersonID" Type="int" />
+        </EntityType>
+        <Association Name="FK_EmailAddresses_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="EmailAddresses" Type="Self.EmailAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailAddresses">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_People_Countries_CountryID">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_People_PhoneBooks_PhoneBookID">
+          <End Role="PhoneBooks" Type="Self.PhoneBooks" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneBooks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="PhoneBookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneBooks_Owners_OwnerID">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="0..1" />
+          <End Role="PhoneBooks" Type="Self.PhoneBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhoneBooks">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneNumbers_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="PhoneNumbers" Type="Self.PhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhoneNumbers">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OwnerModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailAddresses" EntityType="Self.EmailAddresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneBooks" EntityType="Self.PhoneBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumbers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmailAddresses_People_PersonID" Association="Self.FK_EmailAddresses_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="EmailAddresses" EntitySet="EmailAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_People_Countries_CountryID" Association="Self.FK_People_Countries_CountryID">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_People_PhoneBooks_PhoneBookID" Association="Self.FK_People_PhoneBooks_PhoneBookID">
+            <End Role="PhoneBooks" EntitySet="PhoneBooks" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneBooks_Owners_OwnerID" Association="Self.FK_PhoneBooks_Owners_OwnerID">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="PhoneBooks" EntitySet="PhoneBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneNumbers_People_PersonID" Association="Self.FK_PhoneNumbers_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="PhoneNumbers" EntitySet="PhoneNumbers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OwnerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="People" Relationship="Self.FK_People_Countries_CountryID" FromRole="Countries" ToRole="People" />
+        </EntityType>
+        <EntityType Name="EmailAddresses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonID" Type="Int32" />
+          <NavigationProperty Name="People" Relationship="Self.FK_EmailAddresses_People_PersonID" FromRole="EmailAddresses" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PhoneBooks" Relationship="Self.FK_PhoneBooks_Owners_OwnerID" FromRole="Owners" ToRole="PhoneBooks" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="lName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="PhoneBookID" Type="Int32" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_People_Countries_CountryID" FromRole="People" ToRole="Countries" />
+          <NavigationProperty Name="EmailAddresses" Relationship="Self.FK_EmailAddresses_People_PersonID" FromRole="People" ToRole="EmailAddresses" />
+          <NavigationProperty Name="PhoneBooks" Relationship="Self.FK_People_PhoneBooks_PhoneBookID" FromRole="People" ToRole="PhoneBooks" />
+          <NavigationProperty Name="PhoneNumbers" Relationship="Self.FK_PhoneNumbers_People_PersonID" FromRole="People" ToRole="PhoneNumbers" />
+        </EntityType>
+        <EntityType Name="PhoneBooks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="Int32" />
+          <NavigationProperty Name="Owners" Relationship="Self.FK_PhoneBooks_Owners_OwnerID" FromRole="PhoneBooks" ToRole="Owners" />
+          <NavigationProperty Name="People" Relationship="Self.FK_People_PhoneBooks_PhoneBookID" FromRole="PhoneBooks" ToRole="People" />
+        </EntityType>
+        <EntityType Name="PhoneNumbers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonID" Type="Int32" />
+          <NavigationProperty Name="People" Relationship="Self.FK_PhoneNumbers_People_PersonID" FromRole="PhoneNumbers" ToRole="People" />
+        </EntityType>
+        <Association Name="FK_People_Countries_CountryID">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailAddresses_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="EmailAddresses" Type="Self.EmailAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmailAddresses">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneBooks_Owners_OwnerID">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="0..1" />
+          <End Role="PhoneBooks" Type="Self.PhoneBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhoneBooks">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_People_PhoneBooks_PhoneBookID">
+          <End Role="PhoneBooks" Type="Self.PhoneBooks" Multiplicity="0..1" />
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneBooks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="PhoneBookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhoneNumbers_People_PersonID">
+          <End Role="People" Type="Self.People" Multiplicity="0..1" />
+          <End Role="PhoneNumbers" Type="Self.PhoneNumbers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PhoneNumbers">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OwnerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="EmailAddresses" EntityType="Self.EmailAddresses" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="PhoneBooks" EntityType="Self.PhoneBooks" />
+          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumbers" />
+          <AssociationSet Name="FK_People_Countries_CountryID" Association="Self.FK_People_Countries_CountryID">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailAddresses_People_PersonID" Association="Self.FK_EmailAddresses_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="EmailAddresses" EntitySet="EmailAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneBooks_Owners_OwnerID" Association="Self.FK_PhoneBooks_Owners_OwnerID">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="PhoneBooks" EntitySet="PhoneBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_People_PhoneBooks_PhoneBookID" Association="Self.FK_People_PhoneBooks_PhoneBookID">
+            <End Role="PhoneBooks" EntitySet="PhoneBooks" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhoneNumbers_People_PersonID" Association="Self.FK_PhoneNumbers_People_PersonID">
+            <End Role="People" EntitySet="People" />
+            <End Role="PhoneNumbers" EntitySet="PhoneNumbers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OwnerModelStoreContainer" CdmEntityContainer="OwnerEntities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="OwnerModel.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="OwnerModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailAddresses">
+            <EntityTypeMapping TypeName="OwnerModel.EmailAddresses">
+              <MappingFragment StoreEntitySet="EmailAddresses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="OwnerModel.Owners">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="OwnerModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lName" ColumnName="lName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="PhoneBookID" ColumnName="PhoneBookID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneBooks">
+            <EntityTypeMapping TypeName="OwnerModel.PhoneBooks">
+              <MappingFragment StoreEntitySet="PhoneBooks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneNumbers">
+            <EntityTypeMapping TypeName="OwnerModel.PhoneNumbers">
+              <MappingFragment StoreEntitySet="PhoneNumbers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
