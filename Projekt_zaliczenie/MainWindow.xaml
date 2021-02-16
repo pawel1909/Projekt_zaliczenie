@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfProject"
-        xmlns:pagemodels ="clr-namespace:WpfProject.PagesModels"
-        xmlns:page="clr-namespace:WpfProject.Pages"
+        xmlns:local="clr-namespace:Projekt_zaliczenie"
+        xmlns:pagemodels ="clr-namespace:Projekt_zaliczenie.PagesModels"
+        xmlns:page="clr-namespace:Projekt_zaliczenie.Pages"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1366">
 
@@ -21,6 +21,9 @@
         </DataTemplate>
         <DataTemplate x:Name="Call" DataType="{x:Type pagemodels:Call_model}">
             <page:Call DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="Test" DataType="{x:Type pagemodels:Test_model}">
+            <page:Test DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
 

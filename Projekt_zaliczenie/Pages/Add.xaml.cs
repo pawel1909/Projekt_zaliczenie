@@ -10,11 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfProject.Enum;
+using Projekt_zaliczenie.Enum;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace WpfProject.Pages
+namespace Projekt_zaliczenie.Pages
 {
     /// <summary>
     /// Interaction logic for Add.xaml
@@ -46,6 +46,8 @@ namespace WpfProject.Pages
                 MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                 Mail.Text = "";
             }
+
+            MessageBox.Show(Phone.MaxLength.ToString());
         }
         /// <summary>
         /// Kod ograniczający ilość cyfr i format numeru w zaleźności od wybranego kraju
@@ -58,6 +60,10 @@ namespace WpfProject.Pages
             string[] split = Phone.Text.Split(new char[] { '-', '(', ')' });
             StringBuilder sb = new StringBuilder();
 
+            if (Country_box.Text == "")
+            {
+                Phone.MaxLength = 0;
+            }
             if (Country_box.Text == "Poland")
             {
                 Phone.MaxLength = 15;

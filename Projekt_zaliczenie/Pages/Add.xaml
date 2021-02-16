@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="WpfProject.Pages.Add"
+﻿<UserControl x:Class="Projekt_zaliczenie.Pages.Add"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfProject.Pages"
+             xmlns:local="clr-namespace:Projekt_zaliczenie.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1366">
-    <Grid Margin="100">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50"/>
@@ -27,16 +27,14 @@
         <TextBlock x:Name="Notatki" Grid.Column="0" Grid.Row="4" Text="" Margin="15" VerticalAlignment="Center">Notatki</TextBlock>
 
         <TextBox x:Name="Imie_nazw" Grid.Row="0" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxHeight="50" MaxLength="50" TextChanged="Imie_nazw_TextChanged"/>
-        
+
         <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxLength="100" TextChanged="Mail_TextChanged"/>
         <TextBox x:Name="Phone" Grid.Row="3" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" TextChanged="Phone_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox x:Name="Notes" Grid.Row="4" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxLength="200"/>
 
         <Button x:Name="Add_Contacts" Grid.Column="1" Grid.Row="5" Content="Dodaj Kontakty" Click="Add_btn" Width="150" Height="50" HorizontalAlignment="Right" Margin="0,0,150,0"/>
-        
+
         <!-- Lista Krajów rozwijana -->
         <ComboBox x:Name="Country_box" Grid.Row="1" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged"/>
-
-
     </Grid>
 </UserControl>

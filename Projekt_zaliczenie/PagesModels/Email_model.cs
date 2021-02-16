@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WpfProject.PagesModels
+namespace Projekt_zaliczenie.PagesModels
 {
     public class Email_model
     {

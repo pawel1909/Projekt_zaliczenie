@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WpfProject.Enum
+namespace Projekt_zaliczenie.Enum
 {
     public enum Country
     {

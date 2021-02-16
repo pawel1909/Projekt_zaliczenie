@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfProject.PagesModels;
+using Projekt_zaliczenie.PagesModels;
 
 namespace WpfProject
 {
@@ -49,7 +49,8 @@ namespace WpfProject
 
         private void list_btn(object sender, RoutedEventArgs e)
         {
-
+            DataContext = new Test_model();
+            MessageBoxResult result = MessageBox.Show(DataContext.ToString());
         }
     }
 }
