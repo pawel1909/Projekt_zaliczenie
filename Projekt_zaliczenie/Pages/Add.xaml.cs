@@ -47,7 +47,18 @@ namespace Projekt_zaliczenie.Pages
                 Mail.Text = "";
             }
 
-            MessageBox.Show(Phone.MaxLength.ToString());
+            OwnerEntities db = new OwnerEntities();
+
+            Countries country = new Countries() { Country = Country.Poland.ToString() };
+
+            People obj = new People()
+            {
+                fName = this.Imie_nazw.Text.Split(' ')[0],
+                lName = this.Imie_nazw.Text.Split(' ')[1]
+
+            };
+
+            db.People.Add(obj);
         }
         /// <summary>
         /// Kod ograniczający ilość cyfr i format numeru w zaleźności od wybranego kraju

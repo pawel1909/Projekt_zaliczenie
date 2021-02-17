@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -20,14 +21,26 @@ namespace Projekt_zaliczenie.Pages
     /// </summary>
     public partial class Test : UserControl
     {
+        OwnerEntities context = new OwnerEntities();
+        CollectionViewSource peopleViewSources;
+
         public Test()
         {
             InitializeComponent();
+            peopleViewSources = ((CollectionViewSource)(FindResource("peopleViewSource")));
+            DataContext = this;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 
+            // Do not load your data at design time.
+            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            // {
+            // 	//Load your data here and assign the result to the CollectionViewSource.
+            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
+            // 	myCollectionViewSource.Source = your data
+            // }
             // Do not load your data at design time.
             // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             // {
@@ -41,7 +54,50 @@ namespace Projekt_zaliczenie.Pages
         {
             OwnerEntities db = new OwnerEntities();
 
-            this.Testgrid.ItemsSource = db.PhoneBooks.ToList();
+            //Owners owner = new Owners()
+            //{
+            //    lName = "xxx",
+            //    fName = "xxxxx"
+            //};
+
+            //PhoneBooks phone = new PhoneBooks()
+            //{
+            //    OwnerID = 1
+            //};
+
+            //Countries country = new Countries()
+            //{
+            //    Country = "Poland"
+            //};
+
+            //People people = new People()
+            //{
+            //    lName = "xxxx",
+            //    fName = "xww",
+            //    CountryID = 1,
+            //    PhoneBookID = 1
+            //};
+
+            //EmailAddresses email = new EmailAddresses()
+            //{
+            //    PersonID = 1,
+            //    Email = "xxxxxx@wp.pl"
+            //};
+
+            //PhoneNumbers number = new PhoneNumbers()
+            //{
+            //    PersonID = 1,
+            //    Number = "123123123"
+            //};
+
+
+            //db.Owners.Add(owner);
+            //db.People.Add(people);
+            //db.PhoneBooks.Add(phone);
+            //db.PhoneNumbers.Add(number);
+            //db.Countries.Add(country);
+            //db.SaveChanges();
+            this.Testgrid.ItemsSource = db.People.ToList();
         }
 
         private void zmiana_test(object sender, SelectionChangedEventArgs e)
@@ -58,6 +114,20 @@ namespace Projekt_zaliczenie.Pages
                     }
                 }
             }
+        }
+
+        private void delete_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerEntities db = new OwnerEntities();
+
+            //var q = db.PhoneBooks.OrderBy(x => x.ID).Include(x => x.People).Include(x => x.Owners).First();
+            var q1 = db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First();
+
+
+            db.People.Remove(q1);
+            db.SaveChanges();
+
+
         }
     }
 }
