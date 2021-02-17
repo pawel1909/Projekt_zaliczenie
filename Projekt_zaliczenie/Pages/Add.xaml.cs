@@ -21,6 +21,10 @@ namespace Projekt_zaliczenie.Pages
     /// </summary>
     public partial class Add : UserControl
     {
+
+        
+
+        
         public Add()
         {
             InitializeComponent();
@@ -29,6 +33,9 @@ namespace Projekt_zaliczenie.Pages
             {
                 Country_box.Items.Add(item);
             }
+
+            
+            
         }
         /// <summary>
         /// Dodanie danych do bazy
@@ -37,28 +44,71 @@ namespace Projekt_zaliczenie.Pages
         /// <param name="e"></param>
         private void Add_btn(object sender, RoutedEventArgs e)
         {
-            try
+            using (OwnerEntities db = new OwnerEntities())
             {
-                var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
+                try
+                {
+                    var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
+
+                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));
+                    if (q.Count() >= 1)
+                    {
+                        MessageBox.Show("xx");
+                    }
+
+                    //Owners pawel = new Owners()
+                    //{
+                    //    fName = "Pawel",
+                    //    lName = "Papiernik"
+                    //};
+
+                    //PhoneBooks book = new PhoneBooks()
+                    //{
+                    //    OwnerID = pawel.ID
+                    //};
+
+                    int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).FirstOrDefault().ID;
+                    
+
+                    People person = new People()
+                    {
+                        fName = this.Full_name.Text.Split(' ')[0],
+                        lName = this.Full_name.Text.Split(' ')[1],
+                        CountryID = countryID
+                    };
+
+                    EmailAddresses email = new EmailAddresses()
+                    {
+                        Email = this.Mail.Text.ToString()
+                    };
+
+                    PhoneNumbers number = new PhoneNumbers()
+                    {
+                        Number = this.Phone.Text.ToString()
+                    };
+
+                    db.People.Add(person);
+                    //db.Owners.Add(pawel);
+                    //db.PhoneBooks.Add(book);
+                    db.EmailAddresses.Add(email);
+                    db.PhoneNumbers.Add(number);
+                    db.SaveChanges();
+
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
+                    Mail.Text = "";
+                }
+
+                
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
-                Mail.Text = "";
-            }
 
-            OwnerEntities db = new OwnerEntities();
+            
 
-            Countries country = new Countries() { Country = Country.Poland.ToString() };
+            
 
-            People obj = new People()
-            {
-                fName = this.Imie_nazw.Text.Split(' ')[0],
-                lName = this.Imie_nazw.Text.Split(' ')[1]
-
-            };
-
-            db.People.Add(obj);
         }
         /// <summary>
         /// Kod ograniczający ilość cyfr i format numeru w zaleźności od wybranego kraju
@@ -167,14 +217,18 @@ namespace Projekt_zaliczenie.Pages
         {
 
         }
-
+        /// <summary>
+        /// Tworzenie tylko jednej spacji pomiędzy wyrazami, proste i do zepsucia.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Imie_nazw_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Imie_nazw.Text.Length > 2)
+            if (Full_name.Text.Length > 2)
             {
-                if (Imie_nazw.Text[Imie_nazw.Text.Length - 1].ToString() == " " && Imie_nazw.Text[Imie_nazw.Text.Length - 2].ToString() == " ")
+                if (Full_name.Text[Full_name.Text.Length - 1].ToString() == " " && Full_name.Text[Full_name.Text.Length - 2].ToString() == " ")
                 {
-                    string[] spl = Imie_nazw.Text.Split(' ');
+                    string[] spl = Full_name.Text.Split(' ');
                     string temp = "";
 
                     for (int i = 0; i < spl.Length; i++)
@@ -182,7 +236,7 @@ namespace Projekt_zaliczenie.Pages
                         temp += spl[i];
                     }
 
-                    Imie_nazw.Text = temp;
+                    Full_name.Text = temp;
                 }
             }
         }

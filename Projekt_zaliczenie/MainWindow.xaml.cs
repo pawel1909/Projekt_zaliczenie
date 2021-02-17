@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Projekt_zaliczenie;
+using Projekt_zaliczenie.Enum;
 using Projekt_zaliczenie.PagesModels;
 
 namespace WpfProject
@@ -26,6 +28,21 @@ namespace WpfProject
 
             InitializeComponent();
             DataContext = new Start_model();
+            using (OwnerEntities db = new OwnerEntities())
+            {
+                if (db.Countries.Count() == 0)
+                {
+                    foreach (var item in Country.GetValues(typeof(Country)))
+                    {
+                        Countries c = new Countries()
+                        {
+                            Country = item.ToString()
+                        };
+                        db.Countries.Add(c);
+                    }
+                    db.SaveChanges();
+                }
+            }
         }
 
         private void dodaj_btn(object sender, RoutedEventArgs e)

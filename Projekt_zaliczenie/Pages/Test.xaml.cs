@@ -97,7 +97,10 @@ namespace Projekt_zaliczenie.Pages
             //db.PhoneNumbers.Add(number);
             //db.Countries.Add(country);
             //db.SaveChanges();
-            this.Testgrid.ItemsSource = db.People.ToList();
+
+            var q = db.PhoneBooks;
+
+            this.Testgrid.ItemsSource = q.ToList();
         }
 
         private void zmiana_test(object sender, SelectionChangedEventArgs e)
@@ -115,16 +118,28 @@ namespace Projekt_zaliczenie.Pages
                 }
             }
         }
-
+        /// <summary>
+        /// Przycisk odpowiedzialny za usuwanie obiektów z bazy.
+        /// </summary>
+        /// <param name="sender">Nie mam pojęcia co to jest</param>
+        /// <param name="e"></param>
         private void delete_Click(object sender, RoutedEventArgs e)
         {
             OwnerEntities db = new OwnerEntities();
 
-            //var q = db.PhoneBooks.OrderBy(x => x.ID).Include(x => x.People).Include(x => x.Owners).First();
-            var q1 = db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First();
 
+            //dodaj using (
+            //var q = db.Owners.Include(x => x.PhoneBooks).First();
+            //var q1 = db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First();
+            //var q2 = db.PhoneBooks.Include(x => x.Owners).Include(x => x.People).First();
+            //var q4 = db.EmailAddresses.First();
+            //var q5 = db.PhoneNumbers.First();
 
-            db.People.Remove(q1);
+            //db.People.Remove(q1);
+            //db.EmailAddresses.Remove(q4);
+            //db.PhoneNumbers.Remove(q5);
+            //db.Owners.Remove(q);
+            //db.PhoneBooks.Remove(q2);
             db.SaveChanges();
 
 
