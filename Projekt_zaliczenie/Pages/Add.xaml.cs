@@ -56,39 +56,50 @@ namespace Projekt_zaliczenie.Pages
                         MessageBox.Show("xx");
                     }
 
-                    //Owners pawel = new Owners()
-                    //{
-                    //    fName = "Pawel",
-                    //    lName = "Papiernik"
-                    //};
+                    Owners pawel = new Owners()
+                    {
+                        fName = "Pawel",
+                        lName = "Papiernik"
+                    };
 
-                    //PhoneBooks book = new PhoneBooks()
-                    //{
-                    //    OwnerID = pawel.ID
-                    //};
+                    db.Owners.Add(pawel);
+                    db.SaveChanges();
+
+                    PhoneBooks book = new PhoneBooks()
+                    {
+                        OwnerID = db.Owners.Where(x => x.fName == "Pawel").First().ID
+                    };
+                    db.PhoneBooks.Add(book);
+                    db.SaveChanges();
 
                     int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).FirstOrDefault().ID;
-                    
+
 
                     People person = new People()
                     {
                         fName = this.Full_name.Text.Split(' ')[0],
                         lName = this.Full_name.Text.Split(' ')[1],
-                        CountryID = countryID
+                        CountryID = countryID,
+                        PhoneBookID = db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == "Pawel").FirstOrDefault().ID).First().ID
                     };
-
+                    db.People.Add(person);
+                    db.SaveChanges();
+                    string a = Full_name.Text.Split(' ')[1].ToString();
+                    string b = Full_name.Text.Split(' ')[0].ToString();
                     EmailAddresses email = new EmailAddresses()
                     {
-                        Email = this.Mail.Text.ToString()
+                        Email = this.Mail.Text.ToString(),
+                        PersonID = db.People.Where(x => x.lName.Contains(a)).Where(x => x.fName.Contains(b)).FirstOrDefault().ID                        
                     };
 
                     PhoneNumbers number = new PhoneNumbers()
                     {
-                        Number = this.Phone.Text.ToString()
+                        Number = this.Phone.Text.ToString(),
+                        PersonID = db.People.Where(x => x.lName.Contains(a)).Where(x => x.fName.Contains(b)).FirstOrDefault().ID
                     };
 
-                    db.People.Add(person);
-                    //db.Owners.Add(pawel);
+                    
+                    
                     //db.PhoneBooks.Add(book);
                     db.EmailAddresses.Add(email);
                     db.PhoneNumbers.Add(number);
@@ -96,7 +107,7 @@ namespace Projekt_zaliczenie.Pages
 
 
                 }
-                catch (Exception)
+                catch (ArgumentException)
                 {
                     MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                     Mail.Text = "";

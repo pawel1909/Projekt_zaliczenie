@@ -98,7 +98,7 @@ namespace Projekt_zaliczenie.Pages
             //db.Countries.Add(country);
             //db.SaveChanges();
 
-            var q = db.PhoneBooks;
+            var q = db.Owners;
 
             this.Testgrid.ItemsSource = q.ToList();
         }
@@ -129,17 +129,50 @@ namespace Projekt_zaliczenie.Pages
 
 
             //dodaj using (
-            //var q = db.Owners.Include(x => x.PhoneBooks).First();
-            //var q1 = db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First();
-            //var q2 = db.PhoneBooks.Include(x => x.Owners).Include(x => x.People).First();
-            //var q4 = db.EmailAddresses.First();
-            //var q5 = db.PhoneNumbers.First();
 
-            //db.People.Remove(q1);
-            //db.EmailAddresses.Remove(q4);
-            //db.PhoneNumbers.Remove(q5);
-            //db.Owners.Remove(q);
-            //db.PhoneBooks.Remove(q2);
+            //if (db.Owners.Count() != 0)
+            //{
+            //    var q = db.Owners;
+            //    foreach (var item in q)
+            //    {
+            //        db.Owners.Remove(db.Owners.Include(x => x.PhoneBooks).First());
+            //    }
+            //}
+            //if (db.People.Count() != 0)
+            //{
+            //    var q = db.People;
+            //    foreach (var item in q)
+            //    {
+            //        db.People.Remove(db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First());
+            //    }
+            //}
+            //if (db.PhoneBooks.Count() != 0)
+            //{
+            //    var q = db.PhoneBooks;
+            //    foreach (var item in q)
+            //    {
+            //        db.PhoneBooks.Remove(db.PhoneBooks.Include(x => x.Owners).Include(x => x.People).First());
+            //    }
+            //}
+            //if (db.EmailAddresses.Count() != 0)
+            //{
+            //    var q = db.EmailAddresses;
+            //    foreach (var item in q)
+            //    {
+            //        db.EmailAddresses.Remove(db.EmailAddresses.First());
+            //    }
+            //}
+            //if (db.PhoneNumbers.Count() != 0)
+            //{
+            //    var q = db.PhoneNumbers;
+            //    foreach (var item in q)
+            //    {
+            //        db.PhoneNumbers.Remove(db.PhoneNumbers.First());
+            //    }
+            //}
+
+            db.Database.ExecuteSqlCommand("TRUNCATE TABLE *");
+
             db.SaveChanges();
 
 
