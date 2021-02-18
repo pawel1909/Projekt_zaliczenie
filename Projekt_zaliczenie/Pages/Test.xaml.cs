@@ -99,24 +99,32 @@ namespace Projekt_zaliczenie.Pages
             //db.SaveChanges();
 
             var q = db.Owners;
+            var q1 = db.PhoneBooks;
+            var q2 = db.People;
+            var q3 = db.EmailAddresses;
+            var q4 = db.PhoneNumbers;
 
-            this.Testgrid.ItemsSource = q.ToList();
+            this.TestgridOwner.ItemsSource = q.ToList();
+            this.TestgridPhoneBook.ItemsSource = q1.ToList();
+            this.TestgridPeople.ItemsSource = q2.ToList();
+            this.TestgridEmailAddres.ItemsSource = q3.ToList();
+            this.TestgridPhoneNumber.ItemsSource = q4.ToList();
         }
 
         private void zmiana_test(object sender, SelectionChangedEventArgs e)
         {
-            if (this.Testgrid.SelectedIndex == 0)
-            {
-                if (this.Testgrid.SelectedItems.Count >= 0)
-                {
-                    if (this.Testgrid.SelectedItems[0].GetType() == typeof(PhoneBooks))
-                    {
-                        PhoneBooks p = new PhoneBooks();
+            //if (this.Testgrid.SelectedIndex == 0)
+            //{
+            //    if (this.Testgrid.SelectedItems.Count >= 0)
+            //    {
+            //        if (this.Testgrid.SelectedItems[0].GetType() == typeof(PhoneBooks))
+            //        {
+            //            PhoneBooks p = new PhoneBooks();
 
                         
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
         }
         /// <summary>
         /// Przycisk odpowiedzialny za usuwanie obiektów z bazy.
@@ -130,49 +138,53 @@ namespace Projekt_zaliczenie.Pages
 
             //dodaj using (
 
-            //if (db.Owners.Count() != 0)
-            //{
-            //    var q = db.Owners;
-            //    foreach (var item in q)
-            //    {
-            //        db.Owners.Remove(db.Owners.Include(x => x.PhoneBooks).First());
-            //    }
-            //}
-            //if (db.People.Count() != 0)
-            //{
-            //    var q = db.People;
-            //    foreach (var item in q)
-            //    {
-            //        db.People.Remove(db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First());
-            //    }
-            //}
-            //if (db.PhoneBooks.Count() != 0)
-            //{
-            //    var q = db.PhoneBooks;
-            //    foreach (var item in q)
-            //    {
-            //        db.PhoneBooks.Remove(db.PhoneBooks.Include(x => x.Owners).Include(x => x.People).First());
-            //    }
-            //}
-            //if (db.EmailAddresses.Count() != 0)
-            //{
-            //    var q = db.EmailAddresses;
-            //    foreach (var item in q)
-            //    {
-            //        db.EmailAddresses.Remove(db.EmailAddresses.First());
-            //    }
-            //}
-            //if (db.PhoneNumbers.Count() != 0)
-            //{
-            //    var q = db.PhoneNumbers;
-            //    foreach (var item in q)
-            //    {
-            //        db.PhoneNumbers.Remove(db.PhoneNumbers.First());
-            //    }
-            //}
+            if (db.Owners.Count() != 0)
+            {
+                var q = db.Owners;
+                foreach (var item in q)
+                {
+                    db.Owners.Remove(db.Owners.Include(x => x.PhoneBooks).First());
+                }
+            }
+            if (db.People.Count() != 0)
+            {
+                var q = db.People;
+                foreach (var item in q)
+                {
+                    db.People.Remove(db.People.OrderBy(x => x.ID).Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First());
+                }
+            }
+            if (db.PhoneBooks.Count() != 0)
+            {
+                var q = db.PhoneBooks;
+                foreach (var item in q)
+                {
+                    db.PhoneBooks.Remove(db.PhoneBooks.Include(x => x.Owners).Include(x => x.People).First());
+                }
+            }
+            if (db.EmailAddresses.Count() != 0)
+            {
+                var q = db.EmailAddresses;
+                foreach (var item in q)
+                {
+                    db.EmailAddresses.Remove(db.EmailAddresses.First());
+                }
+            }
+            if (db.PhoneNumbers.Count() != 0)
+            {
+                var q = db.PhoneNumbers;
+                foreach (var item in q)
+                {
+                    db.PhoneNumbers.Remove(db.PhoneNumbers.First());
+                }
+            }
 
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE *");
-
+            //db.Database.ExecuteSqlCommand("DELETE FROM [Owners]");
+            db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.Owners', RESEED, 0)");
+            db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.EmailAddresses', RESEED, 0)");
+            db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.People', RESEED, 0)");
+            db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.PhoneBooks', RESEED, 0)");
+            db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.PhoneNumbers', RESEED, 0)");
             db.SaveChanges();
 
 

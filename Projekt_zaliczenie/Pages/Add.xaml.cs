@@ -51,25 +51,29 @@ namespace Projekt_zaliczenie.Pages
                     var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
 
                     var q = db.Owners.Where(x => x.fName.Contains("Pawel"));
-                    if (q.Count() >= 1)
+                    if (q.Count() == 0)
                     {
-                        MessageBox.Show("xx");
+                        Owners pawel = new Owners()
+                        {
+                            fName = "Pawel",
+                            lName = "Papiernik"
+                        };
+                        db.Owners.Add(pawel);
                     }
-
-                    Owners pawel = new Owners()
-                    {
-                        fName = "Pawel",
-                        lName = "Papiernik"
-                    };
-
-                    db.Owners.Add(pawel);
                     db.SaveChanges();
 
-                    PhoneBooks book = new PhoneBooks()
+
+                    if (db.PhoneBooks.Count() == 0)
                     {
-                        OwnerID = db.Owners.Where(x => x.fName == "Pawel").First().ID
-                    };
-                    db.PhoneBooks.Add(book);
+                        PhoneBooks book = new PhoneBooks()
+                        {
+                            OwnerID = db.Owners.Where(x => x.fName == "Pawel").First().ID
+                        };
+                        db.PhoneBooks.Add(book);
+                    }
+
+
+                    
                     db.SaveChanges();
 
                     int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).FirstOrDefault().ID;
