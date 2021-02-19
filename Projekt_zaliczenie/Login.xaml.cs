@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_zaliczenie.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,12 +30,13 @@ namespace Projekt_zaliczenie
         {
             using (UsersEntities db = new UsersEntities())
             {
+                
                 var q = db.User.Where(x => x.Username == usernametxt.Text).Where(x => x.Password == passwordtxt.Password).Count();
                 if (q == 1)
                 {
-                    MainWindow window = new MainWindow();
-                    window.owner.fName = db.User.Where(x => x.Username == usernametxt.Text).Select(o => o.fName).FirstOrDefault();
-                    window.owner.lName = db.User.Where(x => x.Username == usernametxt.Text).Select(o => o.lName).FirstOrDefault();
+                    MainWindow window = new MainWindow(db.User.Where(x => x.Username == usernametxt.Text).Select(x => x.fName).FirstOrDefault(), db.User.Where(x => x.Username == usernametxt.Text).Select(x => x.lName).FirstOrDefault());
+                    
+                    
                     window.Show();
                     this.Close();
                 }

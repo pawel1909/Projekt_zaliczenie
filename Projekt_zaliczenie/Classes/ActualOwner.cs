@@ -11,15 +11,7 @@ namespace Projekt_zaliczenie.Classes
     /// </summary>
     public static class ActualOwner
     {
-        //public int ID { get; set; }
-        //public string fName { get; set; }
-        //public string lName { get; set; }
-
-        //public ActualOwner(int id, string fname, string lname)
-        //{
-        //    ID = id;
-        //    fName = fname;
-        //    lName = lname;
-        //}
+        public static string fName { get; set; }
+        public static string lName { get; set; }
     }
 }

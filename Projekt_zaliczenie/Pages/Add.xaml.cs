@@ -22,8 +22,6 @@ namespace Projekt_zaliczenie.Pages
     /// </summary>
     public partial class Add : UserControl
     {
-
-        private MainWindow window = new MainWindow();
         
 
         
@@ -44,12 +42,12 @@ namespace Projekt_zaliczenie.Pages
         /// <param name="e"></param>
         private void Add_btn(object sender, RoutedEventArgs e)
         {
-            var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
             using (OwnerEntities db = new OwnerEntities())
             {
                 try
                 {
-                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));  //Sprawdzenie Czy adres E-mail jest prawidłowy
+                    var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text); //Sprawdzenie Czy adres E-mail jest prawidłowy
+                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));  
                     if (q.Count() == 0)
                     {
                         Owners pawel = new Owners()

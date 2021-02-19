@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Projekt_zaliczenie.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1366">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Grid Margin="100">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50"/>

@@ -22,6 +22,15 @@ namespace Projekt_zaliczenie
         public Register()
         {
             InitializeComponent();
+
+            UsersEntities db = new UsersEntities();
+            OwnerEntities owner = new OwnerEntities();
+
+            //db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Users.dbo.User', RESEED, 3)");
+            //owner.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.Owners', RESEED, 3)");
+            //owner.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.PhoneBooks', RESEED, 2)");
+            //db.SaveChanges();
+            //owner.SaveChanges();
         }
 
         private void registerbtn_Click(object sender, RoutedEventArgs e)
@@ -29,6 +38,8 @@ namespace Projekt_zaliczenie
             using (UsersEntities db = new UsersEntities())
             {
                 OwnerEntities owner = new OwnerEntities();
+
+                
 
                 if (db.User.Where(x => x.Username == usernametxt.Text).Count() == 1)
                 {

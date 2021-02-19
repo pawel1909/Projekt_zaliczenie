@@ -24,19 +24,20 @@ namespace WpfProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Owners owner = new Owners();
-        public MainWindow()
+        
+        public MainWindow(string x, string y)
         {
-
             InitializeComponent();
-            DataContext = new Start_model();
+            this.Current_Owner.Text = x + " " + y;
+            ActualOwner.fName = x;
+            ActualOwner.lName = y;
+
+
 
             using (OwnerEntities db = new OwnerEntities())
             {
-                this.Current_Owner.Text = $"{db.Owners.Where(o => o.ID == 1).FirstOrDefault().fName} {db.Owners.Where(o => o.ID == 1).FirstOrDefault().lName}";
-                //var ow = db.Owners.Where(x => x.fName == "Pawel").FirstOrDefault();
-                //ActualOwner owner = new ActualOwner(ow.ID, ow.fName, ow.lName);
-                //MessageBox.Show(owner.ID.ToString());
+                
+                
                 if (db.Countries.Count() == 0)
                 {
                     foreach (var item in Country.GetValues(typeof(Country)))
@@ -47,6 +48,16 @@ namespace WpfProject
                         };
                         db.Countries.Add(c);
                     }
+                    db.SaveChanges();
+                } // wypełnienie bazy Krajami z enum
+
+                if (db.PhoneBooks.Where(a => a.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).Count() == 0)
+                {
+                    PhoneBooks book = new PhoneBooks()
+                    {
+                        OwnerID = db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).First().ID
+                    };
+                    db.PhoneBooks.Add(book);
                     db.SaveChanges();
                 }
             }
@@ -69,12 +80,14 @@ namespace WpfProject
 
         private void list_btn(object sender, RoutedEventArgs e)
         {
-            DataContext = new Test_model();
+            DataContext = new ContactList_model();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-
+            Login log = new Login();
+            log.Show();
+            this.Close();
         }
     }
 }

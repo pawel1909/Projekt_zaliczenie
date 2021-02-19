@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using Projekt_zaliczenie.Classes;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -21,7 +22,6 @@ namespace Projekt_zaliczenie.Pages
     /// </summary>
     public partial class Test : UserControl
     {
-        OwnerEntities context = new OwnerEntities();
 
         public Test()
         {
@@ -119,6 +119,7 @@ namespace Projekt_zaliczenie.Pages
             this.TestgridPeople.ItemsSource = people.ToList();
             this.TestgridEmailAddres.ItemsSource = q3.ToList();
             this.TestgridPhoneNumber.ItemsSource = q4.ToList();
+
         }
 
         private void zmiana_test(object sender, SelectionChangedEventArgs e)

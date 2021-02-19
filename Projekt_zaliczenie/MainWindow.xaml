@@ -25,6 +25,9 @@
         <DataTemplate x:Name="Test" DataType="{x:Type pagemodels:Test_model}">
             <page:Test DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="ContactList" DataType="{x:Type pagemodels:ContactList_model}">
+            <page:ContactList DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
