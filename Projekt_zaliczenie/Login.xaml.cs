@@ -33,6 +33,8 @@ namespace Projekt_zaliczenie
                 if (q == 1)
                 {
                     MainWindow window = new MainWindow();
+                    window.owner.fName = db.User.Where(x => x.Username == usernametxt.Text).Select(o => o.fName).FirstOrDefault();
+                    window.owner.lName = db.User.Where(x => x.Username == usernametxt.Text).Select(o => o.lName).FirstOrDefault();
                     window.Show();
                     this.Close();
                 }

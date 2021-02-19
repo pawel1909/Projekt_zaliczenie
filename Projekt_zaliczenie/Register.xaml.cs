@@ -83,5 +83,12 @@ namespace Projekt_zaliczenie
                 }
             }
         }
+
+        private void Prevbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Login log = new Login();
+            log.Show();
+            this.Close();
+        }
     }
 }

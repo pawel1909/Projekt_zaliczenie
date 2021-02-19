@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="OwnerModel.EmailAddresses" Width="1.5" PointX="7.5" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OwnerModel.Owners" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OwnerModel.People" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OwnerModel.PhoneBooks" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OwnerModel.PhoneBooks" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OwnerModel.PhoneNumbers" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="OwnerModel.FK_People_Countries_CountryID" ManuallyRouted="false" />
         <AssociationConnector Association="OwnerModel.FK_EmailAddresses_People_PersonID" ManuallyRouted="false" />

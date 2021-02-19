@@ -8,12 +8,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1366" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="peopleViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:People}, CreateList=True}"/>
+        <CollectionViewSource x:Key="emailViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:EmailAddresses}, CreateList=True}"/>
         <CollectionViewSource x:Key="countriesViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:Countries}, CreateList=True}"/>
+        <CollectionViewSource x:Key="peopleViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:People}, CreateList=True}"/>
 
     </UserControl.Resources>
 
-    <Grid DataContext="{StaticResource peopleViewSource}">
+    <Grid DataContext="{StaticResource emailViewSource}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -33,5 +34,34 @@
         <DataGrid x:Name="TestgridPhoneNumber" Grid.Row="0" Grid.Column="4" SelectionChanged="zmiana_test" ItemsSource="{Binding}" Margin="0,10,0,350" Grid.RowSpan="2"/>
         <Button x:Name="test_btn" Content="Test" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="100" Click="test_btn_Click"/>
         <Button x:Name="delete" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100" Height="100" Content="Delete" Click="delete_Click"/>
+
+        <DataGrid x:Name="test" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="Send_emailbtn" Content="Wyślij Wiadomość"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding fName}" Header="Imię" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding lName}" Header="Nazwisko" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Email">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedIndex="0" ItemsSource="{Binding Email}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Telefon">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedIndex="0" ItemsSource="{Binding Number}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Country}" Header="Kraj" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

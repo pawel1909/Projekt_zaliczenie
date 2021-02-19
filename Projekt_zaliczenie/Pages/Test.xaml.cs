@@ -22,12 +22,10 @@ namespace Projekt_zaliczenie.Pages
     public partial class Test : UserControl
     {
         OwnerEntities context = new OwnerEntities();
-        CollectionViewSource peopleViewSources;
 
         public Test()
         {
             InitializeComponent();
-            peopleViewSources = ((CollectionViewSource)(FindResource("peopleViewSource")));
             DataContext = this;
         }
 
@@ -104,9 +102,21 @@ namespace Projekt_zaliczenie.Pages
             var q3 = db.EmailAddresses;
             var q4 = db.PhoneNumbers;
 
+            var people = from p in db.People
+                         select new
+                         {
+                             p.fName,
+                             p.lName,
+                             Country = p.Countries.Country,
+                             Email = p.EmailAddresses.Select(x => x.Email).ToList(),
+                             Number = p.PhoneNumbers.Select(x => x.Number).ToList()
+                         };
+
+            this.test.ItemsSource = people.ToList();
+
             this.TestgridOwner.ItemsSource = q.ToList();
             this.TestgridPhoneBook.ItemsSource = q1.ToList();
-            this.TestgridPeople.ItemsSource = q2.ToList();
+            this.TestgridPeople.ItemsSource = people.ToList();
             this.TestgridEmailAddres.ItemsSource = q3.ToList();
             this.TestgridPhoneNumber.ItemsSource = q4.ToList();
         }

@@ -23,7 +23,8 @@ namespace WpfProject
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    { 
+    {
+        public Owners owner = new Owners();
         public MainWindow()
         {
 

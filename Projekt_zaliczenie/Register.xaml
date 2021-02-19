@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_zaliczenie"
         mc:Ignorable="d"
-        Title="Register" Height="420" Width="300">
+        Title="Register" Height="430" Width="300" Background="DarkBlue" ResizeMode="NoResize">
     <Border Background="#2e2137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
             <Label Content="Rejestracja" Foreground="White" FontSize="20" HorizontalAlignment="Center" />
             <Separator></Separator>
             <Label Content="Użytkownik" Foreground="White"/>
-            <TextBox x:Name="usernametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <TextBox x:Name="usernametxt" ToolTip="Nie może być puste, ale o tym zostaniesz poinformowany jak mimo wsyzstko zostawisz puste" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Label Content="Hasło" Foreground="White"/>
-            <PasswordBox x:Name="passwordtxt" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <PasswordBox x:Name="passwordtxt" ToolTip="Hasło może pozostać puste" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Label Content="Imię" Foreground="White"/>
-            <TextBox x:Name="fNametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <TextBox x:Name="fNametxt" ToolTip="Nie może zostać puste, sorki :/" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Label Content="Nazwisko" Foreground="White"/>
-            <TextBox x:Name="lnametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
-            <Button x:Name="registerbtn" Content="Załóż nowe konto" Margin="63,20" FontSize="9" Background="#545d6a" Foreground="White" Click="registerbtn_Click"/>
+            <TextBox x:Name="lnametxt" ToolTip="Nie może zostać puste" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button x:Name="registerbtn" ToolTip="No to teraz zostało się tylko zalogować na nowe konto" Content="Załóż nowe konto" Margin="40,10" FontSize="15" Background="#545d6a" Foreground="White" Click="registerbtn_Click"/>
+            <Button x:Name="Prevbtn" ToolTip="Zabierzcie mnie STĄD!!!!!!!!" Content="Cofnij" Background="#545d6a" Width="50" Foreground="White" HorizontalAlignment="Left" Click="Prevbtn_Click"/>
         </StackPanel>
     </Border>
 </Window>
