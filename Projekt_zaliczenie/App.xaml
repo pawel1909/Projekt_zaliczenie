@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:Projekt_zaliczenie"
              StartupUri="Login.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightPink"/>
+            <!-- Zmiana Koloru wszystkich przycisków w programie -->
+        </Style>
+        <Style TargetType="{x:Type ComboBox}" x:Key="ComboBackground">
+            <Setter Property="Background" Value="Black"/>
+            <!-- Zmiana Koloru wszystkich comboboxów -->
+        </Style>
     </Application.Resources>
+    
 </Application>

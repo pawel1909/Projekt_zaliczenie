@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_zaliczenie.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace Projekt_zaliczenie.Pages
             using(OwnerEntities db = new OwnerEntities())
             {
                 var people = from p in db.People
+                             where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
                              select new
                              {
                                  p.fName,

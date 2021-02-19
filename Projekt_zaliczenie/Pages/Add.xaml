@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1366">
     <UserControl.Resources>
-        
+
     </UserControl.Resources>
     <Grid Margin="100">
         <Grid.RowDefinitions>
@@ -38,6 +38,6 @@
         <Button x:Name="Add_Contacts" Grid.Column="1" Grid.Row="5" Content="Dodaj Kontakty" Click="Add_btn" Width="150" Height="50" HorizontalAlignment="Right" Margin="0,0,150,0"/>
 
         <!-- Lista Krajów rozwijana -->
-        <ComboBox x:Name="Country_box" Grid.Row="1" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="Country_box" Style="{DynamicResource ComboBackground}" Grid.Row="1" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged"/>
     </Grid>
 </UserControl>

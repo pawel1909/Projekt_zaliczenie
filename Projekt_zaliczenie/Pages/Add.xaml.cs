@@ -14,6 +14,7 @@ using Projekt_zaliczenie.Enum;
 using System.Linq;
 using System.Text.RegularExpressions;
 using WpfProject;
+using Projekt_zaliczenie.Classes;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -33,7 +34,7 @@ namespace Projekt_zaliczenie.Pages
             {
                 Country_box.Items.Add(item);
             }
-            
+
         }
         /// <summary>
         /// Dodanie danych do bazy
@@ -47,56 +48,39 @@ namespace Projekt_zaliczenie.Pages
                 try
                 {
                     var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text); //Sprawdzenie Czy adres E-mail jest prawidłowy
-                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));  
-                    if (q.Count() == 0)
-                    {
-                        Owners pawel = new Owners()
-                        {
-                            fName = "Pawel",
-                            lName = "Papiernik"
-                        };
-                        db.Owners.Add(pawel);
-                    }
-                    db.SaveChanges();
-
-
-                    if (db.PhoneBooks.Count() == 0)
-                    {
-                        PhoneBooks book = new PhoneBooks()
-                        {
-                            OwnerID = db.Owners.Where(x => x.fName == "Pawel").First().ID
-                        };
-                        db.PhoneBooks.Add(book);
-                    }
-
-
-                    
-                    db.SaveChanges();
-
+                
                     int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).First().ID;
-
-
-                    People person = new People()
-                    {
-                        fName = this.Full_name.Text.Split(' ')[0],
-                        lName = this.Full_name.Text.Split(' ')[1],
-                        CountryID = countryID,
-                        PhoneBookID = db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == "Pawel").FirstOrDefault().ID).First().ID
-                    };
-                    db.People.Add(person);
-                    db.SaveChanges();
                     string a = Full_name.Text.Split(' ')[1].ToString();
                     string b = Full_name.Text.Split(' ')[0].ToString();
+
+                    var q = db.People.Where(x => x.fName == b).Where(x => x.lName == a);
+                    if (q.Count() == 0)
+                    {
+                        People person = new People()
+                        {
+                            fName = this.Full_name.Text.Split(' ')[0],
+                            lName = this.Full_name.Text.Split(' ')[1],
+                            CountryID = countryID,
+                            PhoneBookID = db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).First().ID
+                        };
+                        db.People.Add(person);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ta osoba istnieje. Dodano dodatkowy adres email i numer telefonu.");
+                    }
+                    
                     EmailAddresses email = new EmailAddresses()
                     {
                         Email = this.Mail.Text.ToString(),
-                        PersonID = db.People.Where(x => x.lName.Contains(a)).Where(x => x.fName.Contains(b)).FirstOrDefault().ID                        
+                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).FirstOrDefault().ID                        
                     };
 
                     PhoneNumbers number = new PhoneNumbers()
                     {
                         Number = this.Phone.Text.ToString(),
-                        PersonID = db.People.Where(x => x.lName.Contains(a)).Where(x => x.fName.Contains(b)).FirstOrDefault().ID
+                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).FirstOrDefault().ID
                     };
 
                     
@@ -113,7 +97,7 @@ namespace Projekt_zaliczenie.Pages
 
 
                 }
-                catch (Exception)
+                catch (ArgumentOutOfRangeException)
                 {
                     MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                     Mail.Text = "";
