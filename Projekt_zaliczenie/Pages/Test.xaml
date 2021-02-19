@@ -9,7 +9,8 @@
              d:DesignHeight="720" d:DesignWidth="1366" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="peopleViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:People}, CreateList=True}"/>
-        
+        <CollectionViewSource x:Key="countriesViewSource" d:DesignSource="{d:DesignInstance {x:Type Projekt_zaliczenie:Countries}, CreateList=True}"/>
+
     </UserControl.Resources>
 
     <Grid DataContext="{StaticResource peopleViewSource}">

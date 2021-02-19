@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Projekt_zaliczenie;
+using Projekt_zaliczenie.Classes;
 using Projekt_zaliczenie.Enum;
 using Projekt_zaliczenie.PagesModels;
 
@@ -22,14 +23,19 @@ namespace WpfProject
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
         public MainWindow()
         {
 
             InitializeComponent();
             DataContext = new Start_model();
+
             using (OwnerEntities db = new OwnerEntities())
             {
+                this.Current_Owner.Text = $"{db.Owners.Where(o => o.ID == 1).FirstOrDefault().fName} {db.Owners.Where(o => o.ID == 1).FirstOrDefault().lName}";
+                //var ow = db.Owners.Where(x => x.fName == "Pawel").FirstOrDefault();
+                //ActualOwner owner = new ActualOwner(ow.ID, ow.fName, ow.lName);
+                //MessageBox.Show(owner.ID.ToString());
                 if (db.Countries.Count() == 0)
                 {
                     foreach (var item in Country.GetValues(typeof(Country)))
@@ -48,26 +54,26 @@ namespace WpfProject
         private void dodaj_btn(object sender, RoutedEventArgs e)
         {
             DataContext = new Add_model();
-
-            MessageBoxResult result = MessageBox.Show(DataContext.ToString());
         }
 
         private void call_btn(object sender, RoutedEventArgs e)
         {
             DataContext = new Call_model();
-            MessageBoxResult result = MessageBox.Show(DataContext.ToString());
         }
 
         private void mail_btn(object sender, RoutedEventArgs e)
         {
             DataContext = new Email_model();
-            MessageBoxResult result = MessageBox.Show(DataContext.ToString());
         }
 
         private void list_btn(object sender, RoutedEventArgs e)
         {
             DataContext = new Test_model();
-            MessageBoxResult result = MessageBox.Show(DataContext.ToString());
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

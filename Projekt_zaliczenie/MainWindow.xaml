@@ -41,7 +41,21 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
+            <TextBlock x:Name="Zalogowany" Margin="0,0,10,0" Text="Jesteś zalogowany jako:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock x:Name="Current_Owner" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button x:Name="Login" Content="Zmień" Grid.Row="1" Grid.ColumnSpan="2" Click="Login_Click"/>
+
+        </Grid>
 
         <DockPanel Background="Gray" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" Width="400" Height="80">
             <StackPanel>

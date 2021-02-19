@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using Projekt_zaliczenie.Enum;
 using System.Linq;
 using System.Text.RegularExpressions;
+using WpfProject;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -22,6 +23,7 @@ namespace Projekt_zaliczenie.Pages
     public partial class Add : UserControl
     {
 
+        private MainWindow window = new MainWindow();
         
 
         
@@ -33,8 +35,6 @@ namespace Projekt_zaliczenie.Pages
             {
                 Country_box.Items.Add(item);
             }
-
-            
             
         }
         /// <summary>
@@ -44,13 +44,12 @@ namespace Projekt_zaliczenie.Pages
         /// <param name="e"></param>
         private void Add_btn(object sender, RoutedEventArgs e)
         {
+            var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
             using (OwnerEntities db = new OwnerEntities())
             {
                 try
                 {
-                    var eMailValidator = new System.Net.Mail.MailAddress(Mail.Text);
-
-                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));
+                    var q = db.Owners.Where(x => x.fName.Contains("Pawel"));  //Sprawdzenie Czy adres E-mail jest prawidłowy
                     if (q.Count() == 0)
                     {
                         Owners pawel = new Owners()
@@ -76,7 +75,7 @@ namespace Projekt_zaliczenie.Pages
                     
                     db.SaveChanges();
 
-                    int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).FirstOrDefault().ID;
+                    int countryID = db.Countries.Where(x => x.Country.Contains(Country_box.Text)).First().ID;
 
 
                     People person = new People()
@@ -109,9 +108,14 @@ namespace Projekt_zaliczenie.Pages
                     db.PhoneNumbers.Add(number);
                     db.SaveChanges();
 
+                    this.Full_name.Text = "";
+                    this.Phone.Text = "";
+                    this.Mail.Text = "";
+                    this.Notes.Text = "";
+
 
                 }
-                catch (ArgumentException)
+                catch (Exception)
                 {
                     MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                     Mail.Text = "";
@@ -138,9 +142,6 @@ namespace Projekt_zaliczenie.Pages
             if (Country_box.Text == "")
             {
                 Phone.Text = "";
-            }
-            if (Country_box.Text == "")
-            {
                 Phone.MaxLength = 0;
             }
             if (Country_box.Text == "Poland")
@@ -178,7 +179,7 @@ namespace Projekt_zaliczenie.Pages
             if (Country_box.Text == "Norway")
             {
                 Phone.MaxLength = 14;
-                if (Phone.Text.ToString().Length == 9)
+                if (Phone.Text.ToString().Length == 8)
                 {
                     foreach (var item in split)
                     {
@@ -188,6 +189,8 @@ namespace Projekt_zaliczenie.Pages
                         }
                     }
                     this.Phone.Text = String.Format("+47 {0:00 00 00 00}", double.Parse(sb.ToString()));
+
+                    
                 }
             }
 

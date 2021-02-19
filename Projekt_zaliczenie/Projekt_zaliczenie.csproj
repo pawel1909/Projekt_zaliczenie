@@ -67,6 +67,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="User.cs">
+      <DependentUpon>UsersDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersDB.edmx</DependentUpon>
+    </Compile>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\ActualOwner.cs" />
     <Compile Include="Countries.cs">
       <DependentUpon>Owners.tt</DependentUpon>
     </Compile>
@@ -85,6 +108,9 @@
       <DependentUpon>Owners.tt</DependentUpon>
     </Compile>
     <Compile Include="Enum\Country.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -189,9 +215,17 @@
     <None Include="Properties\DataSources\People.datasource" />
     <None Include="Properties\DataSources\PhoneBooks.datasource" />
     <None Include="Properties\DataSources\PhoneNumbers.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="UsersDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsersDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="UsersDB.edmx.diagram">
+      <DependentUpon>UsersDB.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +241,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Owners.edmx</DependentUpon>
       <LastGenOutput>Owners1.cs</LastGenOutput>
+    </Content>
+    <Content Include="UsersDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersDB.edmx</DependentUpon>
+      <LastGenOutput>UsersDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UsersDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersDB.edmx</DependentUpon>
+      <LastGenOutput>UsersDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

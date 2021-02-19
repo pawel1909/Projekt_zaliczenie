@@ -178,6 +178,14 @@ namespace Projekt_zaliczenie.Pages
                     db.PhoneNumbers.Remove(db.PhoneNumbers.First());
                 }
             }
+            //if (db.Countries.Count() != 0)
+            //{
+            //    var q = db.Countries;
+            //    foreach (var item in q)
+            //    {
+            //        db.Countries.Remove(db.Countries.First());
+            //    }
+            //}
 
             //db.Database.ExecuteSqlCommand("DELETE FROM [Owners]");
             db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.Owners', RESEED, 0)");
@@ -185,6 +193,7 @@ namespace Projekt_zaliczenie.Pages
             db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.People', RESEED, 0)");
             db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.PhoneBooks', RESEED, 0)");
             db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.PhoneNumbers', RESEED, 0)");
+            //db.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Owner.dbo.Countries', RESEED, 0)");
             db.SaveChanges();
 
 
