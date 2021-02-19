@@ -1,21 +1,24 @@
-﻿<Window x:Class="Projekt_zaliczenie.Login"
+﻿<Window x:Class="Projekt_zaliczenie.Register"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_zaliczenie"
         mc:Ignorable="d"
-        Title="Login" Height="330" Width="300" FontSize="14" Background="DarkGreen" ResizeMode="NoResize">
+        Title="Register" Height="420" Width="300">
     <Border Background="#2e2137" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
-            <Label Content="Logowanie" Foreground="White" FontSize="20" HorizontalAlignment="Center" />
+            <Label Content="Rejestracja" Foreground="White" FontSize="20" HorizontalAlignment="Center" />
             <Separator></Separator>
             <Label Content="Użytkownik" Foreground="White"/>
             <TextBox x:Name="usernametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
             <Label Content="Hasło" Foreground="White"/>
             <PasswordBox x:Name="passwordtxt" Background="#545d6a" Foreground="White" FontSize="18"/>
-            <Button x:Name="loginbtn" Content="Zaloguj" Margin="60,10" Background="#545d6a" Foreground="White" Click="loginbtn_Click"/>
-            <Button x:Name="registerbtn" Content="Załóż nowe konto" Margin="63,0" FontSize="9" Background="#545d6a" Foreground="White" Click="registerbtn_Click"/>
+            <Label Content="Imię" Foreground="White"/>
+            <TextBox x:Name="fNametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Label Content="Nazwisko" Foreground="White"/>
+            <TextBox x:Name="lnametxt" Background="#545d6a" Foreground="White" FontSize="18"/>
+            <Button x:Name="registerbtn" Content="Załóż nowe konto" Margin="63,20" FontSize="9" Background="#545d6a" Foreground="White" Click="registerbtn_Click"/>
         </StackPanel>
     </Border>
 </Window>

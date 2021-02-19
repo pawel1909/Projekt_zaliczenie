@@ -44,5 +44,12 @@ namespace Projekt_zaliczenie
                 }
             }
         }
+
+        private void registerbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Register reg = new Register();
+            reg.Show();
+            this.Close();
+        }
     }
 }
