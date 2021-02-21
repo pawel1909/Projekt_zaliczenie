@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enum\DeleteSearch.cs" />
+    <Compile Include="Enum\Search_list.cs" />
     <Compile Include="Owners1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

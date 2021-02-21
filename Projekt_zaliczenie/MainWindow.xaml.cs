@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Projekt_zaliczenie;
 using Projekt_zaliczenie.Classes;
 using Projekt_zaliczenie.Enum;
+using Projekt_zaliczenie.Pages;
 using Projekt_zaliczenie.PagesModels;
 
 namespace WpfProject
@@ -31,13 +32,16 @@ namespace WpfProject
             this.Current_Owner.Text = x + " " + y;
             ActualOwner.fName = x;
             ActualOwner.lName = y;
+            
 
+            DataContext = new Start_model();
 
 
             using (OwnerEntities db = new OwnerEntities())
             {
-                
-                
+                ActualOwner.ID = db.Owners.Where(o => o.fName == x).Where(o => o.lName == y).FirstOrDefault().ID;
+
+
                 if (db.Countries.Count() == 0)
                 {
                     foreach (var item in Country.GetValues(typeof(Country)))

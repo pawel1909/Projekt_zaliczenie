@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt_zaliczenie.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Projekt_zaliczenie.Pages
         public Start()
         {
             InitializeComponent();
+            using (OwnerEntities db = new OwnerEntities())
+            {
+                Ilosc.Text = "Masz: " + db.People.Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID).Count().ToString();
+            }
+            
         }
     }
 }

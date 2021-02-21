@@ -53,7 +53,7 @@ namespace Projekt_zaliczenie.Pages
                     string a = Full_name.Text.Split(' ')[1].ToString();
                     string b = Full_name.Text.Split(' ')[0].ToString();
 
-                    var q = db.People.Where(x => x.fName == b).Where(x => x.lName == a);
+                    var q = db.People.Where(x => x.fName == b).Where(x => x.lName == a).Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID);
                     if (q.Count() == 0)
                     {
                         People person = new People()
@@ -74,13 +74,13 @@ namespace Projekt_zaliczenie.Pages
                     EmailAddresses email = new EmailAddresses()
                     {
                         Email = this.Mail.Text.ToString(),
-                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).FirstOrDefault().ID                        
+                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID).FirstOrDefault().ID                        
                     };
 
                     PhoneNumbers number = new PhoneNumbers()
                     {
                         Number = this.Phone.Text.ToString(),
-                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).FirstOrDefault().ID
+                        PersonID = db.People.Where(x => x.fName == b).Where(x => x.lName == a).Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID).FirstOrDefault().ID
                     };
 
                     
@@ -93,11 +93,10 @@ namespace Projekt_zaliczenie.Pages
                     this.Full_name.Text = "";
                     this.Phone.Text = "";
                     this.Mail.Text = "";
-                    this.Notes.Text = "";
 
 
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (Exception)
                 {
                     MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                     Mail.Text = "";

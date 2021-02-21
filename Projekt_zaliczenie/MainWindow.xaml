@@ -7,7 +7,7 @@
         xmlns:pagemodels ="clr-namespace:Projekt_zaliczenie.PagesModels"
         xmlns:page="clr-namespace:Projekt_zaliczenie.Pages"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1366">
+        Title="MainWindow" Height="576" Width="700">
 
     <Window.Resources>
         <DataTemplate x:Name="Start" DataType="{x:Type pagemodels:Start_model}">
@@ -29,6 +29,12 @@
             <page:ContactList DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF3E3E3E" Offset="0"/>
+            <GradientStop Color="#FFC7C7C7" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -44,10 +50,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="2" Grid.Column="0">
+        <Grid x:Name="logedGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2C2C30" Offset="1"/>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF9B9BAA"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -56,14 +71,16 @@
 
             <TextBlock x:Name="Zalogowany" Margin="0,0,10,0" Text="Jesteś zalogowany jako:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
             <TextBlock x:Name="Current_Owner" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Button x:Name="Login" Content="Zmień" Grid.Row="1" Grid.ColumnSpan="2" Click="Login_Click"/>
+            <Button x:Name="Login" Style="{DynamicResource Corner}" Content="Zmień" Grid.Row="1" Grid.ColumnSpan="2" Click="Login_Click" Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         </Grid>
 
-        <DockPanel Background="Gray" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" Width="400" Height="80">
+        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" Width="200" Height="80" HorizontalAlignment="Right">
             <StackPanel>
-                <Button Content="Dodaj" Height="20" Click="dodaj_btn"/>
-                <Button Content="Zadzwoń" Height="20" Click="call_btn"/>
+                <Button Content="Dodaj" Height="20" Click="dodaj_btn">
+
+                </Button>
+                <Button Content="Usuń" Height="20" Click="call_btn"/>
                 <Button Content="Napisz e-Mail" Height="20" Click="mail_btn"/>
                 <Button Content="Lista Kontaktów" Height="20" Click="list_btn"/>
             </StackPanel>

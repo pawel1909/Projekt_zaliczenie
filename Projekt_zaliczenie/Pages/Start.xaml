@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="Nazwa" Background="Gray" Margin="20px" Grid.Row="0" Grid.Column="1" FontSize="36" FontWeight="Bold" TextAlignment="Center" >Witaj</TextBlock>
-        <TextBlock x:Name="Ilosc" Text="Masz" Background="Chartreuse" Margin="20" Grid.Column="1" Grid.Row="1" FontSize="36" TextAlignment="Left" FontWeight="Bold"></TextBlock>
+        <TextBlock x:Name="Ilosc" Text="Masz" Background="Chartreuse" Margin="20" Grid.Column="1" Grid.Row="1" FontSize="36" TextAlignment="Center" FontWeight="Bold"></TextBlock>
 
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using Projekt_zaliczenie.Classes;
+using Projekt_zaliczenie.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,12 @@ namespace Projekt_zaliczenie.Pages
         public ContactList()
         {
             InitializeComponent();
+            foreach (var item in Search_list.GetValues(typeof(Search_list)))
+            {
+                SearchCombo.Items.Add(item);
+            }
 
-            using(OwnerEntities db = new OwnerEntities())
+            using (OwnerEntities db = new OwnerEntities())
             {
                 var people = from p in db.People
                              where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
@@ -39,9 +44,65 @@ namespace Projekt_zaliczenie.Pages
                              };
 
                 this.ContactListGrid.ItemsSource = people.ToList();
+
+                
             }
 
-            
+        }
+
+        private void searching(object sender, TextCompositionEventArgs e)
+        {
+            using (OwnerEntities db = new OwnerEntities())
+            {
+                if (searchtxt.Text != "")
+                {
+                    if (SearchCombo.Text == "Imię")
+                    {
+                        var fNameSearch = from p in db.People
+                                          where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
+                                          where p.fName.Contains(searchtxt.Text)
+                                          select new
+                                          {
+                                              p.fName,
+                                              p.lName,
+                                              Country = p.Countries.Country,
+                                              Email = p.EmailAddresses.Select(x => x.Email).ToList(),
+                                              Number = p.PhoneNumbers.Select(x => x.Number).ToList()
+                                          };
+                        this.seatchGrid.ItemsSource = fNameSearch.ToList();
+                    }
+                    else if (SearchCombo.Text == "Nazwisko")
+                    {
+                        var lNameSearch = from p in db.People
+                                          where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
+                                          where p.lName.Contains(searchtxt.Text)
+                                          select new
+                                          {
+                                              p.fName,
+                                              p.lName,
+                                              Country = p.Countries.Country,
+                                              Email = p.EmailAddresses.Select(x => x.Email).ToList(),
+                                              Number = p.PhoneNumbers.Select(x => x.Number).ToList()
+                                          };
+                        this.seatchGrid.ItemsSource = lNameSearch.ToList();
+                    }
+                    else if (SearchCombo.Text == "Kraj")
+                    {
+                        var CountrySearch = from p in db.People
+                                          where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
+                                          where p.CountryID == db.Countries.Where(x => x.Country.Contains(searchtxt.Text)).FirstOrDefault().ID
+                                          select new
+                                          {
+                                              p.fName,
+                                              p.lName,
+                                              Country = p.Countries.Country,
+                                              Email = p.EmailAddresses.Select(x => x.Email).ToList(),
+                                              Number = p.PhoneNumbers.Select(x => x.Number).ToList()
+                                          };
+                        this.seatchGrid.ItemsSource = CountrySearch.ToList();
+                    }
+                }
+            }
         }
     }
 }

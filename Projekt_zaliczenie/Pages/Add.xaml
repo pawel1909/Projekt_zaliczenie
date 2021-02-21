@@ -5,39 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projekt_zaliczenie.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="720" d:DesignWidth="1366">
+             d:DesignHeight="576" d:DesignWidth="700">
     <UserControl.Resources>
 
     </UserControl.Resources>
-    <Grid Margin="100">
+    <Grid Margin="50" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50"/>
-            <RowDefinition MaxHeight="50"/>
-            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50" Height="51"/>
             <RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
+            <ColumnDefinition MaxWidth="550" MinWidth="400"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock x:Name="Imie_Nazwisko" Grid.Column="0" Grid.Row="0" Text="" Margin="15" VerticalAlignment="Center">Imię i Nazwisko</TextBlock>
         <TextBlock x:Name="Kraj" Grid.Column="0" Grid.Row="1" Text="" Margin="15" VerticalAlignment="Center">Kraj</TextBlock>
         <TextBlock x:Name="Adres_Email" Grid.Column="0" Grid.Row="2" Text="" Margin="15" VerticalAlignment="Center">Adres Email</TextBlock>
         <TextBlock x:Name="Telefon" Grid.Column="0" Grid.Row="3" Text="" Margin="15" VerticalAlignment="Center">Numer telefonu</TextBlock>
-        <TextBlock x:Name="Notatki" Grid.Column="0" Grid.Row="4" Text="" Margin="15" VerticalAlignment="Center">Notatki</TextBlock>
 
-        <TextBox x:Name="Full_name" Grid.Row="0" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxHeight="50" MaxLength="50" TextChanged="Imie_nazw_TextChanged"/>
+        <!-- boxy do wpisywania danych 'Imie Nazwisko', 'Email', 'Telefon' -->
+        <TextBox x:Name="Full_name" Grid.Row="0" Grid.Column="1" Margin="10,10,50,10" VerticalContentAlignment="Center" MaxHeight="50" MaxLength="50" TextChanged="Imie_nazw_TextChanged"/>
+        <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="1" Margin="10,10,50,10" VerticalContentAlignment="Center" MaxLength="100" TextChanged="Mail_TextChanged"/>
+        <TextBox x:Name="Phone" Grid.Row="3" Grid.Column="1" Margin="10,10,50,10" VerticalContentAlignment="Center" TextChanged="Phone_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
 
-        <TextBox x:Name="Mail" Grid.Row="2" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxLength="100" TextChanged="Mail_TextChanged"/>
-        <TextBox x:Name="Phone" Grid.Row="3" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" TextChanged="Phone_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="Notes" Grid.Row="4" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" MaxLength="200"/>
 
-        <Button x:Name="Add_Contacts" Grid.Column="1" Grid.Row="5" Content="Dodaj Kontakty" Click="Add_btn" Width="150" Height="50" HorizontalAlignment="Right" Margin="0,0,150,0"/>
+        <Button x:Name="Add_Contacts" Style="{DynamicResource Corner}" Grid.Column="1" Grid.Row="5" Content="Dodaj Kontakty" Click="Add_btn" Width="150" Height="50" HorizontalAlignment="Right" Margin="0,0,150,0"/>
 
         <!-- Lista Krajów rozwijana -->
-        <ComboBox x:Name="Country_box" Style="{DynamicResource ComboBackground}" Grid.Row="1" Grid.Column="1" Margin="10,10,150,10" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged"/>
+        <ComboBox x:Name="Country_box" Grid.Row="1" Grid.Column="1" Margin="10,10,50,10" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                    <GradientStop Color="#FFF50707" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
     </Grid>
 </UserControl>

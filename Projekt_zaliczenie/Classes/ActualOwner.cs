@@ -13,5 +13,7 @@ namespace Projekt_zaliczenie.Classes
     {
         public static string fName { get; set; }
         public static string lName { get; set; }
+
+        public static int ID { get; set; }
     }
 }
