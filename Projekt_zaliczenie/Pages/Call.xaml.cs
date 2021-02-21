@@ -94,6 +94,21 @@ namespace Projekt_zaliczenie.Pages
                                             };
                         this.DeleteListGrid.ItemsSource = CountrySearch.ToList();
                     }
+                    else if (deletesearchtxt.Text == "Telefon")
+                    {
+                        var phoneSearch = from p in db.People
+                                            where p.PhoneBookID == db.PhoneBooks.Where(x => x.OwnerID == db.Owners.Where(o => o.fName == ActualOwner.fName).Where(o => o.lName == ActualOwner.lName).FirstOrDefault().ID).FirstOrDefault().ID
+                                            where p.ID == db.PhoneNumbers.Where(x => x.Number.Contains(deletesearchtxt.Text)).FirstOrDefault().PersonID
+                                            select new
+                                            {
+                                                p.fName,
+                                                p.lName,
+                                                Country = p.Countries.Country,
+                                                Email = p.EmailAddresses.Select(x => x.Email).ToList(),
+                                                Number = p.PhoneNumbers.Select(x => x.Number).ToList()
+                                            };
+                        this.DeleteListGrid.ItemsSource = phoneSearch.ToList();
+                    }
                 }
             }
         }

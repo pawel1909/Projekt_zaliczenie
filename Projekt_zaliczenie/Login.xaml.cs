@@ -31,6 +31,7 @@ namespace Projekt_zaliczenie
             using (UsersEntities db = new UsersEntities())
             {
                 
+                
                 var q = db.User.Where(x => x.Username == usernametxt.Text).Where(x => x.Password == passwordtxt.Password).Count();
                 if (q == 1)
                 {

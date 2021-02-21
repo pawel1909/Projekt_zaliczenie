@@ -10,6 +10,7 @@ namespace Projekt_zaliczenie.Enum
     {
         Imię,
         Nazwisko,
-        Email
+        Email,
+        Telefon
     }
 }
