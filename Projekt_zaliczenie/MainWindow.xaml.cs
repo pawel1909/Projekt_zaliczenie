@@ -63,7 +63,7 @@ namespace WpfProject
                     };
                     db.PhoneBooks.Add(book);
                     db.SaveChanges();
-                }
+                }  //stworzenie książki dla aktualnego usera, jeżeli nie istnieje
             }
         }
 

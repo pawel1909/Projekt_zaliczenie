@@ -30,7 +30,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding fName}" Header="Imię" IsReadOnly="True"/>
+                <DataGridTextColumn x:Name="fNametxt" Binding="{Binding fName}" Header="Imię" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding lName}" Header="Nazwisko" IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Email">
                     <DataGridTemplateColumn.CellTemplate>
@@ -49,6 +49,7 @@
                 <DataGridTextColumn Width="*" Binding="{Binding Country}" Header="Kraj" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        
 
     </Grid>
 </UserControl>

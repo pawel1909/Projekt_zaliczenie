@@ -82,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddMore.xaml.cs">
+      <DependentUpon>AddMore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Validate.cs" />
     <Compile Include="Enum\DeleteSearch.cs" />
     <Compile Include="Enum\Search_list.cs" />
     <Compile Include="Owners1.cs">
@@ -114,6 +118,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UsersDB.edmx</DependentUpon>
     </Compile>
+    <Page Include="AddMore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,13 +272,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeleteMe.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DeleteMe_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>DeleteMe.mdf</DependentUpon>
-    </Content>
     <Content Include="Owners.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Owners.edmx</DependentUpon>

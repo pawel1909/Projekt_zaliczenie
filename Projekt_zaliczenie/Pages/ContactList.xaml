@@ -22,7 +22,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Send_emailbtn" Content="Wyślij Wiadomość"/>
+                            <Button x:Name="addmorebtn" Content="Dodaj Więcej" Click="addmorebtn"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

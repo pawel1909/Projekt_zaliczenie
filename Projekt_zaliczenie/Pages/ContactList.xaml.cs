@@ -1,5 +1,6 @@
 ﻿using Projekt_zaliczenie.Classes;
 using Projekt_zaliczenie.Enum;
+using Projekt_zaliczenie.PagesModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfProject;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -103,6 +105,27 @@ namespace Projekt_zaliczenie.Pages
                     }
                 }
             }
+        }
+
+
+        private void addmorebtn(object sender, RoutedEventArgs e)
+        {
+            string data = this.ContactListGrid.SelectedItem.ToString().Trim('}', '{').Trim();
+            var q = data.Split(',')
+                .Select(x => x.Split('='))
+                .Select(x => x[1].Trim());
+            string u = "";
+            foreach (var item in q)
+            {
+                u += (" " + item);
+            }
+            string[] q2 = u.Trim().Split(' ');
+            string Im = q2[0];
+            string Na = q2[1];
+
+            AddMore add = new AddMore();
+            add.Show();
+
         }
     }
 }

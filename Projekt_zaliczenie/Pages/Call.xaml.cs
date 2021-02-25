@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Projekt_zaliczenie.Classes;
+using System.Data.Entity;
 
 namespace Projekt_zaliczenie.Pages
 {
@@ -115,7 +116,51 @@ namespace Projekt_zaliczenie.Pages
 
         private void delete_btn(object sender, RoutedEventArgs e)
         {
-            
+            string data = this.DeleteListGrid.SelectedItem.ToString().Trim('}', '{').Trim();
+            var q = data.Split(',')
+                .Select(x => x.Split('='))
+                .Select(x => x[1].Trim());
+            string u = "";
+            foreach (var item in q)
+            {
+                u += (" " + item);
+            }
+            string[] q2 = u.Trim().Split(' ');
+            string Im = q2[0];
+            string Na = q2[1];
+
+            using(OwnerEntities db = new OwnerEntities())
+            {
+                var email = from p in db.EmailAddresses
+                            where p.PersonID == db.People.Where(x => x.fName == Im).Where(x => x.lName == Na).FirstOrDefault().ID
+                            select p;
+                
+                int temp = email.Count();
+                for (int i = 0; i < temp; i++)
+                {
+                    db.EmailAddresses.Remove(email.FirstOrDefault());
+                }
+                db.SaveChanges();
+                var numbers = from p in db.PhoneNumbers
+                            where p.PersonID == db.People.Where(x => x.fName == Im).Where(x => x.lName == Na).FirstOrDefault().ID
+                            select p;
+
+                temp = numbers.Count();
+
+                for (int i = 0; i < temp; i++)
+                {
+                    db.PhoneNumbers.Remove(numbers.FirstOrDefault());
+                }
+                db.SaveChanges();
+                var people = from p in db.People
+                             where p.fName == Im
+                             where p.lName == Na
+                             select p;
+
+                db.People.Remove(people.Include(x => x.Countries).Include(x => x.EmailAddresses).Include(x => x.PhoneNumbers).First());
+                db.SaveChanges();
+
+            }
         }
     }
 }

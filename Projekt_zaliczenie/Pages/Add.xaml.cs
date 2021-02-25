@@ -100,6 +100,7 @@ namespace Projekt_zaliczenie.Pages
                 {
                     MessageBox.Show("Podany Email jest nieprawidłowy. Spróbuj ponownie");
                     Mail.Text = "";
+                    Phone.Text = "";
                 }
 
                 
@@ -118,77 +119,30 @@ namespace Projekt_zaliczenie.Pages
         private void Phone_TextChanged(object sender, TextChangedEventArgs e)
         {
             #region Formatowanie numeru ze względu na kraj
-            string[] split = Phone.Text.Split(new char[] { '-', '(', ')' });
-            StringBuilder sb = new StringBuilder();
-            if (Country_box.Text == "")
+            switch (Country_box.Text)
             {
-                Phone.Text = "";
-                Phone.MaxLength = 0;
-            }
-            if (Country_box.Text == "Poland")
-            {
-                Phone.MaxLength = 15;
-                if (Phone.Text.ToString().Length == 9)
-                {
-                    foreach (var item in split)
-                    {
-                        if (item.Trim() != "")
-                        {
-                            sb.Append(item);
-                        }
-                    }
-                    this.Phone.Text = String.Format("+48 {0:000 000 000}", double.Parse(sb.ToString()));
-                }
-            }
-
-            if (Country_box.Text == "Germany")
-            {
-                Phone.MaxLength = 17;
-                if (Phone.Text.ToString().Length == 11)
-                {
-                    foreach (var item in split)
-                    {
-                        if (item.Trim() != "")
-                        {
-                            sb.Append(item);
-                        }
-                    }
-                    this.Phone.Text = String.Format("+49 {0:000 000 00000}", double.Parse(sb.ToString()));
-                }
-            }
-
-            if (Country_box.Text == "Norway")
-            {
-                Phone.MaxLength = 14;
-                if (Phone.Text.ToString().Length == 8)
-                {
-                    foreach (var item in split)
-                    {
-                        if (item.Trim() != "")
-                        {
-                            sb.Append(item);
-                        }
-                    }
-                    this.Phone.Text = String.Format("+47 {0:00 00 00 00}", double.Parse(sb.ToString()));
-
-                    
-                }
-            }
-
-            if (Country_box.Text == "Czech")
-            {
-                Phone.MaxLength = 16;
-                if (Phone.Text.ToString().Length == 9)
-                {
-                    foreach (var item in split)
-                    {
-                        if (item.Trim() != "")
-                        {
-                            sb.Append(item);
-                        }
-                    }
-                    this.Phone.Text = String.Format("+420 {0:000 000 000}", double.Parse(sb.ToString()));
-                }
+                case "Poland":
+                    Phone.MaxLength = 15;
+                    Phone.Text = Validate.Number(Phone.Text, Country_box.Text);
+                    break;
+                case "Germany":
+                    Phone.MaxLength = 17;
+                    Phone.Text = Validate.Number(Phone.Text, Country_box.Text);
+                    break;
+                case "Norway":
+                    Phone.MaxLength = 14;
+                    Phone.Text = Validate.Number(Phone.Text, Country_box.Text);
+                    break;
+                case "Czech":
+                    Phone.MaxLength = 16;
+                    Phone.Text = Validate.Number(Phone.Text, Country_box.Text);
+                    break;
+                case "":
+                    Phone.MaxLength = 0;
+                    Phone.Text = "";
+                    break;
+                default:
+                    break;
             }
             #endregion
         }
@@ -223,21 +177,7 @@ namespace Projekt_zaliczenie.Pages
         /// <param name="e"></param>
         private void Imie_nazw_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Full_name.Text.Length > 2)
-            {
-                if (Full_name.Text[Full_name.Text.Length - 1].ToString() == " " && Full_name.Text[Full_name.Text.Length - 2].ToString() == " ")
-                {
-                    string[] spl = Full_name.Text.Split(' ');
-                    string temp = "";
-
-                    for (int i = 0; i < spl.Length; i++)
-                    {
-                        temp += spl[i];
-                    }
-
-                    Full_name.Text = temp;
-                }
-            }
+            Full_name.Text = Validate.Name(Full_name.Text);
         }
     }
 }
