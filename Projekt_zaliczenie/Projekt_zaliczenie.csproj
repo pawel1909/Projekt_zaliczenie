@@ -85,6 +85,7 @@
     <Compile Include="AddMore.xaml.cs">
       <DependentUpon>AddMore.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Saving.cs" />
     <Compile Include="Classes\Validate.cs" />
     <Compile Include="Enum\DeleteSearch.cs" />
     <Compile Include="Enum\Search_list.cs" />

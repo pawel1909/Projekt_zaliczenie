@@ -5,18 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Projekt_zaliczenie.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="720" d:DesignWidth="1366">
+             d:DesignHeight="576" d:DesignWidth="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="Nazwa" Background="Gray" Margin="20px" Grid.Row="0" Grid.Column="1" FontSize="36" FontWeight="Bold" TextAlignment="Center" >Witaj</TextBlock>
-        <TextBlock x:Name="Ilosc" Text="Masz" Background="Chartreuse" Margin="20" Grid.Column="1" Grid.Row="1" FontSize="36" TextAlignment="Center" FontWeight="Bold"></TextBlock>
+        
+
+        <Border Grid.Row="0" Grid.Column="0" CornerRadius="30" Margin="100" Background="Gray">
+            <TextBlock x:Name="Nazwa" Margin="20px" FontSize="26" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+        </Border>
 
     </Grid>
 </UserControl>

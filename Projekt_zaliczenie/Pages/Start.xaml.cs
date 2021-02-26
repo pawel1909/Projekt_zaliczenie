@@ -26,7 +26,7 @@ namespace Projekt_zaliczenie.Pages
             InitializeComponent();
             using (OwnerEntities db = new OwnerEntities())
             {
-                Ilosc.Text = "Masz: " + db.People.Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID).Count().ToString();
+                Nazwa.Text = $"Witaj {ActualOwner.fName}"+ "\n" + " Aktualnie masz: " + db.People.Where(x => x.PhoneBookID == db.PhoneBooks.Where(o => o.OwnerID == ActualOwner.ID).FirstOrDefault().ID).Count().ToString() + " kontaktów";
             }
             
         }
